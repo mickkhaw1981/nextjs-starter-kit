@@ -1,0 +1,1 @@
+- Fixed hydration error by moving ThemeProvider inside body tag in layout.tsx 
