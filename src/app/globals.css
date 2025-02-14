@@ -5,9 +5,22 @@
 @layer base {
   :root {
     --radius: 0.5rem;
+    --transition-duration: 0.3s;
   }
 
   body {
     @apply text-foreground bg-background;
   }
+}
+
+/* Add smooth transition for theme changes */
+.dark,
+:root {
+  transition: background-color var(--transition-duration) ease;
+}
+
+* {
+  transition:
+    border-color var(--transition-duration) ease,
+    background-color var(--transition-duration) ease;
 }
