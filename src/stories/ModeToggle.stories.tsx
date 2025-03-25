@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+
 import { ModeToggle } from "@/components/mode-toggle";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -91,7 +92,7 @@ export default function Header() {
         enableSystem
         disableTransitionOnChange
       >
-        <div className="min-h-[200px] min-w-[200px] flex items-center justify-center">
+        <div className="flex min-h-[200px] min-w-[200px] items-center justify-center">
           <Story />
         </div>
       </ThemeProvider>
@@ -121,8 +122,8 @@ export const CustomPosition: Story = {
   args: {},
   decorators: [
     (Story) => (
-      <div className="min-h-[200px] min-w-[200px] relative">
-        <div className="absolute top-2 left-2">
+      <div className="relative min-h-[200px] min-w-[200px]">
+        <div className="absolute left-2 top-2">
           <Story />
         </div>
       </div>

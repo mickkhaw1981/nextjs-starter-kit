@@ -1,1 +1,6 @@
+# Cursor Updates
+
+## 2024-03-19 14:30 PDT
+Fixed ESLint configuration and resolved all linting issues across the codebase, including import order, unused variables, and React Hook usage.
+
 - Fixed hydration error by moving ThemeProvider inside body tag in layout.tsx 

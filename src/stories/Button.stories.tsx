@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
 
 const meta = {
   title: "UI/Button",
@@ -111,7 +112,7 @@ export const Large: Story = {
 export const IconOnly: Story = {
   args: {
     size: "icon",
-    children: <Mail className="h-4 w-4" />,
+    children: <Mail className="size-4" />,
     "aria-label": "Send email",
   },
 };
@@ -120,7 +121,7 @@ export const WithIcon: Story = {
   args: {
     children: (
       <>
-        <Mail className="h-4 w-4" />
+        <Mail className="size-4" />
         Send Email
       </>
     ),
