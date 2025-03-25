@@ -1,36 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Modern Stack Template
 
-## Getting Started
+A Next.js template that combines commonly used tools and libraries for building full-stack web applications. This stack is specifically designed to be optimized for AI coding assistants like Cursor.
 
-First, run the development server:
+## 🎯 Overview
+
+This template includes [Next.js 15](https://nextjs.org/) with the App Router, [Supabase](https://supabase.com) for the database, [Prisma](https://www.prisma.io/) for ORM, and optional integrations with various AI providers and AWS services.
+
+> ⚠️ **Note**: This is my personal template with tools that I personally have experience with.
+
+## ✨ Features
+
+### 🏗️ Core Architecture
+
+- [**Next.js 15**](https://nextjs.org/) - React framework with App Router
+- [**TypeScript**](https://www.typescriptlang.org/) - Type safety throughout
+- [**Prisma**](https://www.prisma.io/) - Database ORM and schema management
+- [**Supabase**](https://supabase.com) - Postgres database with realtime and auth
+
+### 🎨 UI & Styling
+
+- [**Tailwind CSS**](https://tailwindcss.com/) - Utility-first CSS framework
+- [**Framer Motion**](https://www.framer.com/motion/) - Animation library
+- [**Lucide Icons**](https://lucide.dev/) - Icon set
+- Dark mode with Tailwind CSS
+
+### 🛠️ Development Tools
+
+- [**Storybook**](https://storybook.js.org/) - Component development environment
+- [**Geist Font**](https://vercel.com/font) - Typography by Vercel
+
+### 🤖 AI & Background Jobs
+
+- Multiple AI integrations available:
+  - [OpenAI](https://openai.com) - GPT-4 and o-series models
+  - [Anthropic](https://anthropic.com) - Sonnet-3.5
+  - [Perplexity](https://perplexity.ai) - Web search models
+  - [Groq](https://groq.com) - Fast inference
+- [**Inngest**](https://www.inngest.com/) - Background jobs and scheduled tasks
+
+### 🔧 Infrastructure & Services
+
+- [**Resend**](https://resend.com) - Email delivery
+- [**Supabase**](https://supabase.com) - Primary database
+
+### 🔔 Additional Features
+
+- [**react-toastify**](https://fkhadra.github.io/react-toastify/) - Toast notifications
+- Utility functions for common operations
+- TypeScript and ESLint configuration included
+
+## 🚀 Getting Started
+
+1. Fork this repository
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Copy `.env.example` to `.env` and configure your environment variables
+4. Set up your database:
+
+```bash
+npx prisma migrate dev
+```
+
+5. Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) to see your app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `app/` - Next.js app router pages and API routes
+- `src/`
+  - `components/` - UI components
+  - `lib/` - Utilities and configurations
+    - `api/` - tRPC routers
+    - `utils/` - Shared utilities
+  - `stories/` - Storybook files
+- `prisma/` - Database schema
 
-## Learn More
+## 🚀 Deployment
 
-To learn more about Next.js, take a look at the following resources:
+This template is optimized for deployment on [Vercel](https://vercel.com).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Database Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Create a new Supabase project at [supabase.com](https://supabase.com)
+2. Get your database connection strings from Supabase:
+   - Project Settings → Database
+   - Copy both the URI (for `DATABASE_URL`) and Direct Connection (for `DIRECT_URL`)
 
-## Deploy on Vercel
+### Vercel Setup
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Push your code to GitHub
+2. Go to [vercel.com/new](https://vercel.com/new)
+3. Import your repository
+4. Configure the following environment variables:
+   - `DATABASE_URL` - Your Supabase database URL
+   - `DIRECT_URL` - Your Supabase direct connection URL
+   - `NEXTAUTH_SECRET` - Generate with `openssl rand -base64 32`
+   - `NEXTAUTH_URL` - Your production URL (e.g., https://your-app.vercel.app)
+   - Add any other variables from `.env.example` that you're using
+5. Deploy!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Post-Deployment
+
+1. Run database migrations in the Vercel deployment:
+
+```bash
+npx vercel env pull .env.production.local  # Pull production env vars
+npx prisma migrate deploy                  # Deploy migrations to production
+```
+
+2. Set up your custom domain in Vercel (optional):
+   - Go to your project settings
+   - Navigate to Domains
+   - Add your domain and follow the DNS configuration instructions
+
+## 📝 License
+
+MIT License
