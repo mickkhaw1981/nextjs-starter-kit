@@ -16,8 +16,30 @@ If additional or updated documentation is required, use MCP servers (Brave Searc
 - ShadCN UI
 - Framer Motion
 - Storybook
-- Prisma
-- Supabase
+- Prisma for database ORM
+- Supabase for databse
+
+## Icons
+- Prefer `lucide-react`; name icons in PascalCase.
+- Custom icons in `src/components/icons`.
+
+## User Interface (UI) and Styling
+- **Never change or affect the UI unintentionally. Only alter UI components if explicitly instructed or clearly part of the assigned task.
+- Use ShadCN UI and Radix components
+- Use `npx shadcn@latest add <component-name>` to add new shadcn components. NEVER use `npx shadcn-ui@latest add <component-name>` 
+- Use Tailwind CSS (mobile-first, dark mode with dark:(class)). Extend brand tokens in `tailwind.config.ts`.
+
+## Toast Notifications
+- Use `react-toastify` in client components.
+- `toast.success()`, `toast.error()`, etc.
+
+## Storybook
+- Place stories in `src/stories` with `.stories.tsx` extension.
+- One story file per component, matching component name.
+- Use autodocs for automatic documentation.
+- Include multiple variants and sizes in stories.
+- Test interactive features with actions.
+- Use relative imports from component directory.
 
 ## Technical Stack Compliance
 - **Adhere strictly to the project's established technology stack.**
