@@ -25,6 +25,7 @@
 │ ├── constants # Application constants, mock data and config values
 │ ├── lib # Utility libraries and functions
 │ │ ├── actions # Server actions (Next.js 13+ feature)
+│ │ ├── database # Database schema defimitions, utility functions and helpers
 │ │ ├── handlers # API and event handlers
 │ │ └── utils.ts # General utility functions
 │ ├── stories # Storybook stories for UI component documentation
