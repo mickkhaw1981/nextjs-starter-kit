@@ -8,7 +8,12 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "use:local": "node scripts/switchEnv.js local && prisma generate",
+    "use:staging": "node scripts/switchEnv.js staging && prisma generate",
+    "use:prod": "node scripts/switchEnv.js production && prisma generate",
+    "db:current": "node -e \"const env = require('dotenv').config().parsed; console.log('\\n📡 Current Environment:\\n', 'DATABASE_URL:', env?.DATABASE_URL || 'Not set', '\\nDIRECT_URL:', env?.DIRECT_URL || 'Not set', '\\nEnvironment file:', require('fs').existsSync('.env') ? '.env exists' : '.env not found', '\\n')\"",
+    "db:check": "prisma format && prisma validate"
   },
   "prisma": {
     "seed": "tsx prisma/seeds/seed.ts"
@@ -53,6 +58,7 @@
     "@types/react-dom": "^19",
     "@typescript-eslint/eslint-plugin": "^7.3.1",
     "@typescript-eslint/parser": "^7.3.1",
+    "dotenv": "^16.4.7",
     "eslint": "^8.57.0",
     "eslint-config-next": "^15.2.4",
     "eslint-config-prettier": "^9.1.0",
@@ -63,6 +69,7 @@
     "eslint-plugin-tailwindcss": "^3.14.3",
     "postcss": "^8.4.35",
     "prettier": "^3.2.5",
+    "prisma": "^6.5.0",
     "storybook": "^8.5.5",
     "supabase": "^2.20.3",
     "tailwindcss": "^3.4.1",
