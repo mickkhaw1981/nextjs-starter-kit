@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 import { fontFamily } from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
+import forms from "@tailwindcss/forms";
 
 const config = {
   darkMode: ["class"],
@@ -78,6 +79,7 @@ const config = {
     },
   },
   plugins: [
+    forms,
     plugin(({ addBase }) => {
       addBase({
         ":root": {

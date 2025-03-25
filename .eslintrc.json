@@ -3,14 +3,24 @@
   "root": true,
   "extends": [
     "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
     "plugin:storybook/recommended",
     "prettier"
   ],
-  "plugins": ["tailwindcss"],
+  "plugins": ["tailwindcss", "@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
   "rules": {
     "tailwindcss/no-custom-classname": "warn",
     "tailwindcss/enforces-negative-arbitrary-values": "warn",
-    "tailwindcss/enforces-shorthand": "warn"
+    "tailwindcss/enforces-shorthand": "warn",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ]
   },
   "settings": {
     "tailwindcss": {
