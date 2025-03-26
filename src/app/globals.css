@@ -24,3 +24,13 @@
     border-color var(--transition-duration) ease,
     background-color var(--transition-duration) ease;
 }
+
+@layer utilities {
+  .invert-colors {
+    @apply invert dark:invert-0;
+  }
+
+  .font-roboto {
+    font-family: var(--font-roboto);
+  }
+}

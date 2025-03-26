@@ -13,4 +13,5 @@ export const roboto = Roboto({
   style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-roboto",
 });

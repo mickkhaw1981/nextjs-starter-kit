@@ -73,3 +73,17 @@ Fixed placeholder image in auth layout:
 - Added priority attribute to improve loading performance
 - Created fallback in src/assets/images to maintain compatibility
 - Fixed "empty string was passed to src attribute" error
+
+## 2024-04-08
+
+Replaced Space_Grotesk font with Inter and Roboto from fonts.ts and added two h1 headings with respective font styles.
+
+## 2024-04-08
+
+Improved font configuration to be loaded at the layout level:
+
+- Moved font imports from page.tsx to layout.tsx
+- Updated roboto font configuration with variable property
+- Added font-roboto utility class in globals.css
+- Set up fonts to be available across all pages
+- Verified build works correctly with the new font configuration

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import SocialAuthButtons from "@/components/form/social-auth-form";
 import SocialAuthForm from "@/components/form/social-auth-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

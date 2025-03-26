@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { inter } from "@/assets/fonts/font";
+import { inter, roboto } from "@/assets/fonts/font";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={roboto.variable}>
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider
           attribute="class"
