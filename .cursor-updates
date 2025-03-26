@@ -16,3 +16,13 @@ Updated dependencies to their latest compatible versions:
 - Moved ESLint and Prettier related packages to devDependencies
 
 - Fixed hydration error by moving ThemeProvider inside body tag in layout.tsx
+
+- Refactored auth layout to move UI structure from sign-in page to layout.tsx for better reusability across auth pages.
+
+- Replaced inline GitHub SVG in auth-form with imported SVG from assets.
+
+- Fixed placeholder image in auth layout by directly importing SVG from assets folder.
+
+- Fixed GitHub icon in auth form by using inline SVG instead of importing from assets to ensure proper display.
+
+- Configured Next.js to properly support SVG imports using @svgr/webpack and updated auth components to use client-side rendering.
