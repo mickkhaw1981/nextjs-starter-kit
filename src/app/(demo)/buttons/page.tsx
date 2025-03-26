@@ -1,6 +1,7 @@
 "use client";
 
 import { Home, ArrowRight, Mail, Settings, AlertTriangle } from "lucide-react";
+import { toast } from "sonner";
 
 import { PrimaryButton } from "@/components/button/custom-button";
 
@@ -15,7 +16,15 @@ export default function ButtonDemo() {
           <h2 className="text-sm font-medium">Basic Button</h2>
           <PrimaryButton
             title="Click Me"
-            onPress={() => alert("Button clicked!")}
+            onPress={() =>
+              toast("Button clicked!", {
+                description: "Sunday, December 03, 2023 at 9:00 AM",
+                action: {
+                  label: "Undo",
+                  onClick: () => console.log("Undo"),
+                },
+              })
+            }
           />
         </div>
 

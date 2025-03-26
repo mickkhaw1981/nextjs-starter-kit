@@ -11,7 +11,9 @@ export default function Home() {
           Next.js Starter Kit with Roboto
         </h1>
         <Link href="/buttons">
-          <Button className="mx-auto">Go to Buttons</Button>
+          <Button className="mx-auto bg-primary-500 dark:bg-primary-500 dark:text-white">
+            Go to Buttons
+          </Button>
         </Link>
       </div>
     </main>
