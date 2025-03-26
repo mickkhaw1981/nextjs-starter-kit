@@ -61,13 +61,20 @@ const AuthForm = ({
       <div className="grid gap-6">
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" required {...form.register("email")} />
+          <Input
+            id="email"
+            placeholder="me@example.com"
+            type="email"
+            required
+            {...form.register("email")}
+          />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
           <Input
             id="password"
             type="password"
+            placeholder="password"
             required
             {...form.register("password")}
           />
