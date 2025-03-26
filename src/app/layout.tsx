@@ -4,7 +4,7 @@ import { inter, roboto } from "@/assets/fonts/font";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ThemeProvider } from "@/components/theme-provider";
 
-import "./globals.css";
+import "./global.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",

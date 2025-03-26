@@ -180,7 +180,6 @@ Status:
 - `src/`
   - `components/` - UI components
   - `lib/` - Utilities and configurations
-    - `api/` - tRPC routers
     - `utils/` - Shared utilities
   - `stories/` - Storybook files
 - `prisma/` - Database schema

@@ -35,11 +35,10 @@ alwaysApply: true
 - Write clean, concise components
 - Do not include comments unless it is for complex logic
 
-
 ## Naming Conventions:
 - Use lowercase with dashes for directories (e.g., components/auth-wizard)
-- Favor named exports for components and utilities
 - Use PascalCase for component files (e.g., VisaForm.tsx)
-- Use camelCase for utility files (e.g., formValidator.ts)
+- Use camelCase for utility files, variables and function names (e.g., getUserData, isAuthenticated)
+- Favor named exports for components and utilities
 
 
