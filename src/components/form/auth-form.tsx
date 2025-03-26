@@ -1,84 +1,112 @@
 "use client";
 
-import Image from "next/image";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
+import SocialAuthButtons from "@/components/form/social-auth-form";
+import SocialAuthForm from "@/components/form/social-auth-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
+import { SignInSchema } from "@/lib/validations";
 
-export function AuthForm({
+export type ActionResponse = {
+  success: boolean;
+  message: string;
+};
+
+type FormData = z.infer<typeof SignInSchema>;
+
+interface AuthFormProps {
+  schema: typeof SignInSchema;
+  defaultValues: FormData;
+  onSubmit: (data: FormData) => Promise<ActionResponse>;
+  formType: "SIGN_IN" | "SIGN_UP";
+  className?: string;
+}
+
+const AuthForm = ({
+  schema,
+  defaultValues,
+  formType,
+  onSubmit,
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"form">) {
+}: AuthFormProps) => {
+  const buttonText = formType === "SIGN_IN" ? "Sign In" : "Sign Up";
+
+  const form = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues,
+  });
+
+  const handleSubmit = form.handleSubmit(async (data) => {
+    await onSubmit(data);
+  });
+
   return (
-    <form className={cn("flex flex-col gap-6", className)} {...props}>
+    <form
+      onSubmit={handleSubmit}
+      className={cn("flex flex-col gap-6", className)}
+      {...props}
+    >
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold">Login to your account</h1>
-        <p className="text-balance text-sm text-muted-foreground">
-          Enter your email below to login to your account
-        </p>
+        <h1 className="text-2xl font-bold">
+          {formType === "SIGN_IN" ? "Sign In" : "Sign Up"}
+        </h1>
       </div>
       <div className="grid gap-6">
         <div className="grid gap-2">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Input id="email" type="email" required {...form.register("email")} />
         </div>
         <div className="grid gap-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" type="password" required />
-          <div className="flex justify-end">
-            <a
-              href="#"
-              className="text-xs text-muted-foreground underline-offset-4 hover:underline"
-            >
-              Forgot your password?
-            </a>
-          </div>
+          <Input
+            id="password"
+            type="password"
+            required
+            {...form.register("password")}
+          />
+          {formType === "SIGN_IN" && (
+            <div className="flex justify-end">
+              <a
+                href="#"
+                className="text-xs text-muted-foreground underline-offset-4 hover:underline"
+              >
+                Forgot your password?
+              </a>
+            </div>
+          )}
         </div>
         <Button type="submit" className="w-full">
-          Login
+          {buttonText}
         </Button>
-        <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-          <span className="relative z-10 bg-background px-2 text-muted-foreground">
-            Or continue with
-          </span>
-        </div>
-        <Button
-          variant="outline"
-          className="flex w-full items-center justify-center"
-        >
-          <Image
-            src="/icons/github.svg"
-            alt="Github Logo"
-            width={20}
-            height={20}
-            className="mr-2.5 object-contain"
-          />
-          <span>Log in with Github</span>
-        </Button>
-        <Button
-          variant="outline"
-          className="flex w-full items-center justify-center"
-        >
-          <Image
-            src="/icons/google.svg"
-            alt="Google Logo"
-            width={20}
-            height={20}
-            className="mr-2.5 object-contain"
-          />
-          <span>Log in with Google</span>
-        </Button>
+        <SocialAuthForm className="grid gap-4" />
       </div>
       <div className="text-center text-sm">
-        Don&apos;t have an account?{" "}
-        <Link href={ROUTES.SIGN_UP} className="font-bold">
-          Sign up
-        </Link>
+        {formType === "SIGN_IN" ? (
+          <>
+            Don&apos;t have an account?{" "}
+            <Link href={ROUTES.SIGN_UP} className="font-bold">
+              Sign up
+            </Link>
+          </>
+        ) : (
+          <>
+            Already have an account?{" "}
+            <Link href={ROUTES.SIGN_IN} className="font-bold">
+              Sign in
+            </Link>
+          </>
+        )}
       </div>
     </form>
   );
-}
+};
+
+export default AuthForm;
