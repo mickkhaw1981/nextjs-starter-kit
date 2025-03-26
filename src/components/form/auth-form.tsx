@@ -1,9 +1,12 @@
 "use client";
 
-import GithubIcon from "@/assets/icons/github.svg";
+import Image from "next/image";
+import Link from "next/link";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 
 export function AuthForm({
@@ -24,16 +27,16 @@ export function AuthForm({
           <Input id="email" type="email" placeholder="m@example.com" required />
         </div>
         <div className="grid gap-2">
-          <div className="flex items-center">
-            <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">Password</Label>
+          <Input id="password" type="password" required />
+          <div className="flex justify-end">
             <a
               href="#"
-              className="ml-auto text-sm underline-offset-4 hover:underline"
+              className="text-xs text-muted-foreground underline-offset-4 hover:underline"
             >
               Forgot your password?
             </a>
           </div>
-          <Input id="password" type="password" required />
         </div>
         <Button type="submit" className="w-full">
           Login
@@ -47,15 +50,34 @@ export function AuthForm({
           variant="outline"
           className="flex w-full items-center justify-center"
         >
-          <GithubIcon className="mr-2 size-5" />
-          Login with GitHub
+          <Image
+            src="/icons/github.svg"
+            alt="Github Logo"
+            width={20}
+            height={20}
+            className="mr-2.5 object-contain"
+          />
+          <span>Log in with Github</span>
+        </Button>
+        <Button
+          variant="outline"
+          className="flex w-full items-center justify-center"
+        >
+          <Image
+            src="/icons/google.svg"
+            alt="Google Logo"
+            width={20}
+            height={20}
+            className="mr-2.5 object-contain"
+          />
+          <span>Log in with Google</span>
         </Button>
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}
-        <a href="#" className="underline underline-offset-4">
+        <Link href={ROUTES.SIGN_UP} className="font-bold">
           Sign up
-        </a>
+        </Link>
       </div>
     </form>
   );

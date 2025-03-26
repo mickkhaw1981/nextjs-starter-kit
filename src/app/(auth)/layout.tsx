@@ -4,8 +4,6 @@ import { GalleryVerticalEnd } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
-import PlaceholderImage from "@/assets/images/placeholder.svg";
-
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
@@ -24,10 +22,11 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
       </div>
       <div className="relative hidden bg-muted lg:block">
         <Image
-          src={PlaceholderImage}
-          alt="Image"
+          src="/images/placeholder.svg"
+          alt="Auth background"
           fill
           className="absolute inset-0 size-full object-cover dark:brightness-[0.2] dark:grayscale"
+          priority
         />
       </div>
     </div>
