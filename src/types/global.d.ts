@@ -1,8 +1,15 @@
-// This file contains type declarations for modules that don't have their own types
+type ActionResponse<T = null> = {
+  success: boolean;
+  data?: T;
+  error?: {
+    message: string;
+    details?: Record<string, string[]>;
+  };
+  status?: number;
+};
 
-// SVG imports
-declare module "*.svg" {
-  import React from "react";
-  const SVG: React.FC<React.SVGProps<SVGSVGElement>>;
-  export default SVG;
-}
+type SuccessResponse<T = null> = ActionResponse<T> & { success: true };
+type ErrorResponse = ActionResponse<undefined> & { success: false };
+
+type APIErrorResponse = NextResponse<ErrorResponse>;
+type APIResponse<T = null> = NextResponse<SuccessResponse<T> | ErrorResponse>;
