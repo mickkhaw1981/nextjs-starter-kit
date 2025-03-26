@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 
+import GoogleIcon from "@/assets/icons/google.png";
 import { Button } from "@/components/ui/button";
 
 interface SocialAuthFormProps {
@@ -48,7 +49,7 @@ const SocialAuthForm = ({ className }: SocialAuthFormProps) => {
         onClick={handleGoogleLogin}
       >
         <Image
-          src="/icons/google.svg"
+          src={GoogleIcon}
           alt="Google Logo"
           width={20}
           height={20}

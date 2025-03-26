@@ -21,6 +21,8 @@ const config = {
     },
     extend: {
       colors: {
+        // From SHADCN. Base UI colors that use CSS variables defined in globals.css
+        // These are used for common UI elements and follow the design system
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

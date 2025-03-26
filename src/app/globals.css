@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  /* 
+   * CSS Custom Properties (variables) for consistent styling across the application
+   * --radius: Used for border-radius values throughout the UI for consistent rounding
+   * --transition-duration: Defines the standard animation speed for transitions
+   *   Used in theme changes, hover effects, and other interactive elements
+   */
   :root {
     --radius: 0.5rem;
     --transition-duration: 0.3s;

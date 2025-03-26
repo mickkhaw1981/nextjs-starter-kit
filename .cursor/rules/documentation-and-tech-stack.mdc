@@ -13,11 +13,11 @@ If additional or updated documentation is required, use MCP servers (Brave Searc
 - React
 - TypeScript
 - Tailwind CSS
-- ShadCN UI
+- ShadCN UI components
 - Framer Motion
 - Storybook
 - Prisma for database ORM
-- Supabase for databse
+- Supabase for database
 
 ## Icons
 - Prefer `lucide-react`; name icons in PascalCase.
@@ -30,8 +30,9 @@ If additional or updated documentation is required, use MCP servers (Brave Searc
 - Use Tailwind CSS (mobile-first, dark mode with dark:(class)). Extend brand tokens in `tailwind.config.ts`.
 
 ## Toast Notifications
-- Use `react-toastify` in client components.
-- `toast.success()`, `toast.error()`, etc.
+- Use `sonner` toast component
+- import { toast } from "sonner"
+- toast("Event has been created.")
 
 ## Storybook
 - Place stories in `src/stories` with `.stories.tsx` extension.
