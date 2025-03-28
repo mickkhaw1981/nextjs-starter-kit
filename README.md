@@ -101,7 +101,7 @@ npm run db:check
 1. `.env.local` - Local development database configuration
 2. `.env.staging` - Staging/testing database configuration
 3. `.env.production` - Production database configuration (never commit this file)
-4. `.env.sample` - Template for environment variables (safe to commit)
+4. `.env.example` - Template for environment variables (safe to commit)
 
 The switching system will:
 
