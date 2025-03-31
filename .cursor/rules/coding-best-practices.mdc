@@ -5,37 +5,30 @@ alwaysApply: true
 ---
 ## IMPORTANT:
 - After all changes are made, ALWAYS build the project with `npm run build`. Ignore warnings, fix errors.
+- Always kill all existing related servers that may have been created in previous testing before trying to start a new server.
 - Always add a one-sentence summary of changes to `.cursor-updates` file in markdown format at the end of every agent interaction.
-- If you forget, the user can type the command "finish" and you will run the build and update `.cursor-updates`.
 - Finally, don't update git with `git add . && git commit -m "..."` without asking the user's permission
 
 ## Coding Best Practices
-- **Do not modify code or UI elements that already work, unless explicitly instructed. Avoid duplicating existing functionality; reuse working components whenever possible.
+- Keep the codebase very clean and organized
+- Always look for existing code to iterate on instead of creating new code.
+- **Do not modify code or UI elements that already work, unless explicitly instructed. 
+- Avoid duplicating existing functionality; reuse working components whenever possible.
 - Write comprehensive tests for featureswhere the cost of failure is high e.g. authentication, payments. When in doubt, ask for clarification
 - Always ask clarifying questions if tasks or requirements are unclear.
-
+- Write thorough tests for all major functionality where the cost of failure is high e.g. authentication, payments
 
 ## Typescript Conventions:
 - Strict mode. Avoid `any`.
-- Use optional chaining, union types (no enums).
 
 
-## Next.js Coding Conventions:
-- Use App Router
-- Default to Server Components where possible
-- Assume we always design for mobile and web. Follow responsive design principles
-- Implement efficient data fetching
-- Implement error handling
-- Use loading states
-- Follow routing conventions
-- Use absolute imports (@/ for src, ~/ for outside)
-- Write clean, concise components
-- Do not include comments unless it is for complex logic
+## Env Rules
+- If you update environment variables, update the `.env.example` file
+- All environment variables should go in `.env.local`
+- Do not expose environment variables to the frontend
+- Use `NEXT_PUBLIC_` prefix for environment variables that need to be accessed from the frontend
+- You may import environment variables in server actions and components by using `process.env.VARIABLE_NAME`
 
-## Naming Conventions:
-- Use lowercase with dashes for directories (e.g., components/auth-wizard)
-- Use PascalCase for component files (e.g., VisaForm.tsx)
-- Use camelCase for utility files, variables and function names (e.g., getUserData, isAuthenticated)
-- Favor named exports for components and utilities
+
 
 

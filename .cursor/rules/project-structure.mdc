@@ -4,19 +4,23 @@ globs:
 alwaysApply: true
 ---
 ## Next.js Structure
-- Use App Router in `src/app/`. Server components by default, `"use client"` for client logic.
-- Project structure can be found in [project-structure.md](mdc:docs/project-structure.md)
+- Use App Router in `src/app/`
+- Default to Server Components where possible
+- Assume we always design for mobile and web. Follow responsive design principles
+- Implement efficient data fetching
+- Implement error handling
+- Use loading states
+- Follow routing conventions
+- Use absolute imports (@/ for src, ~/ for outside)
+- Write clean, concise components
+
+## File tree
+- Project file tree can be found in [project-structure.md](mdc:docs/project-structure.md)
 
 # File & Folder Names
-- Next.js routes in kebab-case (e.g. `app/dashboard/page.tsx`).
-- Name in PascalCase under `src/components/`.
-- Shared types in `src/lib/types.ts`.
-- Sort imports (external → internal → sibling → styles).
+- Use lowercase with dashes for directories (e.g., components/auth-wizard)
+- Use PascalCase for component files (e.g., VisaForm.tsx)
+- Use camelCase for utility files, variables and function names (e.g., getUserData, isAuthenticated)
+- Favor named exports for components and utilities
 
 
-#### Env Rules
-- If you update environment variables, update the `.env.example` file
-- All environment variables should go in `.env.local`
-- Do not expose environment variables to the frontend
-- Use `NEXT_PUBLIC_` prefix for environment variables that need to be accessed from the frontend
-- You may import environment variables in server actions and components by using `process.env.VARIABLE_NAME`
