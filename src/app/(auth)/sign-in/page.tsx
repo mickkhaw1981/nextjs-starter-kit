@@ -1,6 +1,6 @@
 "use client";
 
-import AuthForm from "@/components/form/AuthForm";
+import AuthForm from "@/components/form/auth-form";
 import { SignInSchema } from "@/lib/validations";
 
 export default function SignIn() {

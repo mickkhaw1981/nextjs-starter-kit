@@ -5,10 +5,10 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import SocialAuthForm from "@/components/form/SocialAuthForm";
-import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Input";
-import { Label } from "@/components/ui/Label";
+import SocialAuthForm from "@/components/form/social-auth-form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import { SignInSchema } from "@/lib/validations";

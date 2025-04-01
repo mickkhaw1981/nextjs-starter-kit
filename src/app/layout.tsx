@@ -2,8 +2,8 @@ import "./global.css";
 import { Metadata } from "next";
 
 import { inter, roboto } from "@/assets/fonts/font";
-import { ModeToggle } from "@/components/ModeToggle";
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ModeToggle } from "@/components/mode-toggle";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",

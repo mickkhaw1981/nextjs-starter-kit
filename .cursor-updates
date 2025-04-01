@@ -87,3 +87,7 @@ Improved font configuration to be loaded at the layout level:
 - Added font-roboto utility class in globals.css
 - Set up fonts to be available across all pages
 - Verified build works correctly with the new font configuration
+
+## 2024-04-08
+
+Converted all components in /components directory to kebab-case naming convention and updated their imports throughout the project.

@@ -3,7 +3,7 @@
 import { Home, ArrowRight, Mail, Settings, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 
-import { PrimaryButton } from "@/components/button/CustomButton";
+import { PrimaryButton } from "@/components/button/custom-button";
 
 export default function ButtonDemo() {
   return (
