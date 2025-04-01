@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { ModeToggle } from "@/components/mode-toggle";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ModeToggle } from "@/components/ModeToggle";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const meta = {
   title: "Components/ModeToggle",
@@ -25,7 +25,7 @@ Built with Radix UI Dropdown Menu and styled with Tailwind CSS.
 ## Usage
 
 \`\`\`tsx
-import { ModeToggle } from "@/components/mode-toggle"
+import { ModeToggle } from "@/components/ModeToggle"
 
 export default function Header() {
   return (

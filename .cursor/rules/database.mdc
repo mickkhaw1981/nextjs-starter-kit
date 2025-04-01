@@ -4,7 +4,7 @@ globs:
 alwaysApply: true
 ---
 ## Prisma
-- Prisma as the Source of Truth over Supabase
+- Prisma as the Source of Truth over Supabase.
 - Manage DB logic with Prisma in `prisma/schema.prisma. All schema changes should be tracked through migrations. 
 - snake_case table → camelCase fields.
 - No raw SQL; run `npx prisma migrate dev`, never use `npx prisma db push`.

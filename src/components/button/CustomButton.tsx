@@ -1,9 +1,9 @@
 "use client";
 
 import { Loader2, LucideIcon } from "lucide-react";
-import type React from "react";
+import * as React from "react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 
 // Define the props interface
