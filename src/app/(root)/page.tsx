@@ -39,13 +39,10 @@ export default function Home() {
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">Welcome to Our App</h1>
             <p className="font-roboto text-muted-foreground">
-              Please sign in to continue
+              Please sign up to continue
             </p>
             <Link href={ROUTES.SIGN_UP}>
-              <Button
-                onClick={() => setIsLoggedIn(true)}
-                className="mt-2 bg-primary-500 dark:bg-primary-500 dark:text-white"
-              >
+              <Button onClick={() => setIsLoggedIn(true)} variant="default">
                 Get Started
               </Button>
             </Link>
