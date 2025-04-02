@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { inter, roboto } from "@/assets/fonts/font";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -29,6 +30,7 @@ export default function RootLayout({
         >
           <ModeToggle />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
