@@ -76,7 +76,7 @@ export function ForgotPasswordForm({
                   <Input
                     id="email"
                     type="email"
-                    placeholder="m@example.com"
+                    placeholder="Enter your email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -88,11 +88,8 @@ export function ForgotPasswordForm({
                 </Button>
               </div>
               <div className="mt-4 text-center text-sm">
-                Already have an account?{""}
-                <Link
-                  href="/auth/login"
-                  className="underline underline-offset-4"
-                >
+                Already have an account?{" "}
+                <Link href="/auth/login" className="font-semibold">
                   Login
                 </Link>
               </div>
