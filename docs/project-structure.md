@@ -1,41 +1,103 @@
 # Next.js Project Structure Breakdown
 
-├── README.md # Project documentation and setup instructions
-├── components.json # Configuration for UI components, likely for a component library
-├── docs # Documentation folder
-│ └── prd.md # Product Requirements Document
-├── eslint.config.mjs # ESLint configuration for code linting
-├── next-env.d.ts # TypeScript declarations for Next.js environment
-├── next.config.js # Next.js configuration file (JavaScript version)
-├── next.config.ts # Next.js configuration file (TypeScript version)
-├── package-lock.json # Exact dependency tree for reproducible builds
-├── package.json # Project metadata and dependencies
-├── postcss.config.mjs # PostCSS configuration for CSS processing
-├── src # Source code directory
-│ ├── app # App Router directory (Next.js 13+)
-│ │ ├── favicon.ico # Site favicon
-│ │ ├── fonts # Custom font files
-│ │ ├── globals.css # Global CSS styles
-│ │ ├── layout.tsx # Root layout component
-│ │ └── page.tsx # Home page component
-│ ├── components # Reusable UI components
-│ │ ├── mode-toggle.tsx # Theme mode toggle component
-│ │ ├── theme-provider.tsx # Theme context provider
-│ │ └── ui # UI component library
-│ ├── constants # Application constants, mock data and config values
-│ ├── lib # Utility libraries and functions
-│ │ ├── actions # Server actions (Next.js 13+ feature)
-│ │ ├── database # Database schema defimitions, utility functions and helpers
-│ │ ├── handlers # API and event handlers
-│ │ └── utils.ts # General utility functions
-│ ├── stories # Storybook stories for UI component documentation
+├── README.md
+├── components.json
+├── docs
+│ ├── prd.md
+│ ├── project-structure.md
+│ └── turbo-config.md
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── prisma
+│ ├── schema.prisma
+│ └── seeds
+│ └── seed.ts
+├── public
+│ ├── icons
+│ │ ├── github.svg
+│ │ └── google.svg
+│ └── images
+│ ├── placeholder.svg
+│ ├── placeholder2.svg
+│ └── site-logo.svg
+├── screenshots
+├── scripts
+│ └── switchEnv.js
+├── src
+│ ├── app
+│ │ ├── (demo)
+│ │ │ ├── buttons
+│ │ │ ├── colors
+│ │ │ └── inputs
+│ │ ├── (root)
+│ │ │ └── page.tsx
+│ │ ├── auth
+│ │ │ ├── callback
+│ │ │ ├── confirm
+│ │ │ ├── error
+│ │ │ ├── forgot-password
+│ │ │ ├── login
+│ │ │ ├── sign-up
+│ │ │ ├── sign-up-success
+│ │ │ └── update-password
+│ │ ├── favicon.ico
+│ │ ├── global.css
+│ │ ├── layout.tsx
+│ │ ├── page.tsx
+│ │ └── protected
+│ │ └── page.tsx
+│ ├── assets
+│ │ └── fonts
+│ │ └── font.ts
+│ ├── components
+│ │ ├── button
+│ │ │ └── custom-button.tsx
+│ │ ├── forgot-password-form.tsx
+│ │ ├── form
+│ │ │ ├── auth-form.tsx
+│ │ │ └── social-auth-form.tsx
+│ │ ├── logout-button.tsx
+│ │ ├── mode-toggle.tsx
+│ │ ├── theme-provider.tsx
+│ │ ├── ui
+│ │ │ ├── alert.tsx
+│ │ │ ├── badge.tsx
+│ │ │ ├── button.tsx
+│ │ │ ├── card.tsx
+│ │ │ ├── dropdown-menu.tsx
+│ │ │ ├── input.tsx
+│ │ │ ├── label.tsx
+│ │ │ ├── sonner.tsx
+│ │ │ └── table.tsx
+│ │ └── update-password-form.tsx
+│ ├── constants
+│ │ ├── auth-form.ts
+│ │ └── routes.ts
+│ ├── lib
+│ │ ├── actions
+│ │ │ └── auth.action.ts
+│ │ ├── prisma.ts
+│ │ ├── supabase
+│ │ │ ├── client.ts
+│ │ │ ├── middleware.ts
+│ │ │ └── server.ts
+│ │ ├── utils
+│ │ ├── utils.ts
+│ │ └── validations.ts
+│ ├── middleware.ts
+│ ├── stories
 │ │ ├── Button.stories.tsx
 │ │ ├── DropdownMenu.stories.tsx
 │ │ └── ModeToggle.stories.tsx
-│ └── types # TypeScript type definitions
-├── tailwind.config.ts # Tailwind CSS configuration
-└── tsconfig.json # TypeScript configuration
-
-```
-
-```
+│ └── types
+│ ├── action.d.ts
+│ └── global.d.ts
+├── supabase
+│ └── config.toml
+├── tailwind.config.ts
+├── tsconfig.json
+└── tsconfig.tsbuildinfo

@@ -123,3 +123,11 @@ Fixed Sonner toast functionality:
 - Changed form type from "SIGN_IN" to "LOG_IN" in the constants file and login page for better naming consistency.
 
 - Added drop-shadow-lg to the sign-up card container for improved visual depth.
+
+## 2024-08-18
+
+Fixed security issue with .env file:
+
+- Removed .env from Git tracking while preserving the file locally
+- Updated .env.example to match current environment variables structure with placeholders
+- Ensured sensitive credentials are no longer pushed to the repository
