@@ -54,9 +54,7 @@ export function LoginForm({
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
-          </CardDescription>
+          <CardDescription>Welcome back!</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-6">
@@ -76,7 +74,6 @@ export function LoginForm({
                 Login with Google
               </Button>
             </form>
-
             <div className="relative flex py-1 items-center">
               <div className="flex-grow border-t border-gray-300"></div>
               <span className="flex-shrink mx-4 text-sm text-gray-500">or</span>
@@ -90,7 +87,7 @@ export function LoginForm({
                   <Input
                     id="email"
                     type="email"
-                    placeholder="m@example.com"
+                    placeholder="Enter your email"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -99,16 +96,11 @@ export function LoginForm({
                 <div className="grid gap-2">
                   <div className="flex items-center">
                     <Label htmlFor="password">Password</Label>
-                    <Link
-                      href="/auth/forgot-password"
-                      className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                    >
-                      Forgot your password?
-                    </Link>
                   </div>
                   <Input
                     id="password"
                     type="password"
+                    placeholder="Password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -119,7 +111,16 @@ export function LoginForm({
                   {isLoading ? "Logging in..." : "Login"}
                 </Button>
 
-                <div className="mt-4 text-center text-sm">
+                <div className="text-center text-sm">
+                  <Link
+                    href="/auth/forgot-password"
+                    className="inline-block text-sm underline-offset-4 hover:underline"
+                  >
+                    Forgot your password?
+                  </Link>
+                </div>
+
+                <div className="mt-0 text-center text-sm">
                   Don&apos;t have an account?{" "}
                   <Link href="/auth/sign-up" className="font-semibold">
                     Sign up

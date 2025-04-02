@@ -15,6 +15,8 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { signInWithGoogle } from "@/lib/actions/auth.action";
+import Image from "next/image";
 
 export function SignUpForm({
   className,
@@ -22,7 +24,6 @@ export function SignUpForm({
 }: React.ComponentPropsWithoutRef<"div">) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -32,12 +33,6 @@ export function SignUpForm({
     const supabase = createClient();
     setIsLoading(true);
     setError(null);
-
-    if (password !== repeatPassword) {
-      setError("Passwords do not match");
-      setIsLoading(false);
-      return;
-    }
 
     try {
       const { error } = await supabase.auth.signUp({
@@ -64,55 +59,68 @@ export function SignUpForm({
           <CardDescription>Create a new account</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSignUp}>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+          <div className="flex flex-col gap-6">
+            <form action={signInWithGoogle}>
+              <Button
+                type="submit"
+                variant="outline"
+                className="flex items-center justify-center gap-2 w-full"
+                disabled={isLoading}
+              >
+                <Image
+                  src="/icons/google.svg"
+                  alt="Google logo"
+                  width={20}
+                  height={20}
                 />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                </div>
-                <Input
-                  id="password"
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label htmlFor="repeat-password">Repeat Password</Label>
-                </div>
-                <Input
-                  id="repeat-password"
-                  type="password"
-                  required
-                  value={repeatPassword}
-                  onChange={(e) => setRepeatPassword(e.target.value)}
-                />
-              </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating an account..." : "Sign up"}
+                Sign up with Google
               </Button>
+            </form>
+            <div className="relative flex py-1 items-center">
+              <div className="flex-grow border-t border-gray-300"></div>
+              <span className="flex-shrink mx-4 text-sm text-gray-500">or</span>
+              <div className="flex-grow border-t border-gray-300"></div>
             </div>
-            <div className="mt-4 text-center text-sm">
-              Already have an account?{""}
-              <Link href="/auth/login" className="underline underline-offset-4">
-                Login
-              </Link>
-            </div>
-          </form>
+            <form onSubmit={handleSignUp}>
+              <div className="flex flex-col gap-6">
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <div className="flex items-center">
+                    <Label htmlFor="password">Password</Label>
+                  </div>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                {error && <p className="text-sm text-red-500">{error}</p>}
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? "Creating an account..." : "Sign up"}
+                </Button>
+
+                <div className="mt-4 text-center text-sm">
+                  Already have an account?{" "}
+                  <Link href="/auth/login" className="font-semibold">
+                    Login
+                  </Link>
+                </div>
+              </div>
+            </form>
+          </div>
         </CardContent>
       </Card>
     </div>
