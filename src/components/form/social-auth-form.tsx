@@ -1,61 +1,39 @@
 "use client";
 
 import Image from "next/image";
-
+import { signInWithGoogle } from "@/lib/actions/auth.action";
 import { Button } from "@/components/ui/button";
 
 interface SocialAuthFormProps {
   className?: string;
+  buttonText?: string;
+  disabled?: boolean;
 }
 
-const SocialAuthForm = ({ className }: SocialAuthFormProps) => {
-  const handleGithubLogin = async () => {
-    // TODO: Implement GitHub authentication logic
-    console.log("GitHub login clicked");
-  };
-
-  const handleGoogleLogin = async () => {
-    // TODO: Implement Google authentication logic
-    console.log("Google login clicked");
-  };
-
+const SocialAuthForm = ({
+  className,
+  buttonText = "Continue with Google",
+  disabled = false,
+}: SocialAuthFormProps) => {
   return (
     <div className={className}>
-      <div className="relative z-0 text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
-        <span className="relative z-10 bg-background px-2 text-xs text-muted-foreground">
-          Or continue with
-        </span>
-      </div>
-      <Button
-        type="button"
-        variant="outline"
-        className="flex w-full items-center justify-center"
-        onClick={handleGithubLogin}
-      >
-        <Image
-          src="/icons/github.svg"
-          alt="Github Logo"
-          width={20}
-          height={20}
-          className="invert-colors mr-2.5 object-contain"
-        />
-        <span>Log in with Github</span>
-      </Button>
-      <Button
-        type="button"
-        variant="outline"
-        className="flex w-full items-center justify-center"
-        onClick={handleGoogleLogin}
-      >
-        <Image
-          src="/icons/google.svg"
-          alt="Google Logo"
-          width={20}
-          height={20}
-          className="mr-2.5 object-contain"
-        />
-        <span>Log in with Google</span>
-      </Button>
+      <form action={signInWithGoogle}>
+        <Button
+          type="submit"
+          variant="outline"
+          className="flex w-full items-center justify-center"
+          disabled={disabled}
+        >
+          <Image
+            src="/icons/google.svg"
+            alt="Google Logo"
+            width={20}
+            height={20}
+            className="mr-2.5 object-contain"
+          />
+          <span>{buttonText}</span>
+        </Button>
+      </form>
     </div>
   );
 };

@@ -15,8 +15,7 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Image from "next/image";
-import { signInWithGoogle } from "@/lib/actions/auth.action";
+import SocialAuthForm from "@/components/form/social-auth-form";
 
 export function LoginForm({
   className,
@@ -58,26 +57,15 @@ export function LoginForm({
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-6">
-            <form action={signInWithGoogle}>
-              <Button
-                type="submit"
-                variant="outline"
-                className="flex items-center justify-center gap-2 w-full"
-                disabled={isLoading}
-              >
-                <Image
-                  src="/icons/google.svg"
-                  alt="Google logo"
-                  width={20}
-                  height={20}
-                />
-                Login with Google
-              </Button>
-            </form>
-            <div className="relative flex py-1 items-center">
-              <div className="flex-grow border-t border-gray-300"></div>
-              <span className="flex-shrink mx-4 text-sm text-gray-500">or</span>
-              <div className="flex-grow border-t border-gray-300"></div>
+            <SocialAuthForm
+              buttonText="Continue with Google"
+              disabled={isLoading}
+            />
+
+            <div className="relative z-0 text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+              <span className="relative z-10 bg-background px-2 text-xs text-muted-foreground">
+                Or
+              </span>
             </div>
 
             <form onSubmit={handleLogin}>
@@ -114,7 +102,7 @@ export function LoginForm({
                 <div className="text-center text-sm">
                   <Link
                     href="/auth/forgot-password"
-                    className="inline-block text-sm underline-offset-4 hover:underline"
+                    className="inline-block font-semibold"
                   >
                     Forgot your password?
                   </Link>

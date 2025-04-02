@@ -1,118 +1,161 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-import SocialAuthForm from "@/components/form/social-auth-form";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import ROUTES from "@/constants/routes";
-import { cn } from "@/lib/utils";
-import { SignInSchema } from "@/lib/validations";
+import { Button } from "@/components/ui/button";
+import SocialAuthForm from "@/components/form/social-auth-form";
+import { AUTH_FORM_CONFIG, FormType } from "@/constants/auth-form";
 
-export type ActionResponse = {
-  success: boolean;
-  message: string;
-};
-
-type FormData = z.infer<typeof SignInSchema>;
+// Define the auth form fields
+interface AuthFormValues {
+  email: string;
+  password: string;
+}
 
 interface AuthFormProps {
-  schema: typeof SignInSchema;
-  defaultValues: FormData;
-  onSubmit: (data: FormData) => Promise<ActionResponse>;
-  formType: "SIGN_IN" | "SIGN_UP";
+  formType: FormType;
+  schema: z.ZodType<AuthFormValues>;
+  defaultValues: AuthFormValues;
+  onSubmit: (values: AuthFormValues) => Promise<void>;
   className?: string;
 }
 
-const AuthForm = ({
+export function AuthForm({
+  formType,
   schema,
   defaultValues,
-  formType,
   onSubmit,
   className,
   ...props
-}: AuthFormProps) => {
-  const buttonText = formType === "SIGN_IN" ? "Sign In" : "Sign Up";
+}: AuthFormProps & Omit<React.ComponentPropsWithoutRef<"div">, "onSubmit">) {
+  const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<FormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthFormValues>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  const handleSubmit = form.handleSubmit(async (data) => {
-    await onSubmit(data);
-  });
+  const processSubmit = async (data: AuthFormValues) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      await onSubmit(data);
+    } catch (error: unknown) {
+      setError(error instanceof Error ? error.message : "An error occurred");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Get config based on form type
+  const currentConfig = AUTH_FORM_CONFIG[formType];
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={cn("flex flex-col gap-6", className)}
-      {...props}
-    >
-      <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold">
-          {formType === "SIGN_IN" ? "Sign In" : "Sign Up"}
-        </h1>
-      </div>
-      <div className="grid gap-6">
-        <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            placeholder="me@example.com"
-            type="email"
-            required
-            {...form.register("email")}
-          />
-        </div>
-        <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            type="password"
-            placeholder="password"
-            required
-            {...form.register("password")}
-          />
-          {formType === "SIGN_IN" && (
-            <div className="flex justify-end">
-              <a
-                href="#"
-                className="text-xs text-muted-foreground underline-offset-4 hover:underline"
-              >
-                Forgot your password?
-              </a>
+    <div className={cn("flex flex-col gap-6", className)} {...props}>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-2xl">{currentConfig.title}</CardTitle>
+          <CardDescription>{currentConfig.description}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col gap-6">
+            <SocialAuthForm
+              buttonText={currentConfig.socialButtonText}
+              disabled={isLoading}
+            />
+
+            <div className="relative z-0 text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+              <span className="relative z-10 bg-background px-2 text-xs text-muted-foreground">
+                {currentConfig.dividerText}
+              </span>
             </div>
-          )}
-        </div>
-        <Button type="submit" className="w-full">
-          {buttonText}
-        </Button>
-        <SocialAuthForm className="grid gap-4" />
-      </div>
-      <div className="text-center text-sm">
-        {formType === "SIGN_IN" ? (
-          <>
-            Don&apos;t have an account?{" "}
-            <Link href={ROUTES.SIGN_UP} className="font-bold">
-              Sign up
-            </Link>
-          </>
-        ) : (
-          <>
-            Already have an account?{" "}
-            <Link href={ROUTES.SIGN_IN} className="font-bold">
-              Sign in
-            </Link>
-          </>
-        )}
-      </div>
-    </form>
+
+            <form onSubmit={handleSubmit(processSubmit)}>
+              <div className="flex flex-col gap-6">
+                <div className="grid gap-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    {...register("email")}
+                  />
+                  {errors.email && (
+                    <p className="text-sm text-red-500">
+                      {errors.email.message as string}
+                    </p>
+                  )}
+                </div>
+                <div className="grid gap-2">
+                  <div className="flex items-center">
+                    <Label htmlFor="password">Password</Label>
+                  </div>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="Password"
+                    {...register("password")}
+                  />
+                  {errors.password && (
+                    <p className="text-sm text-red-500">
+                      {errors.password.message as string}
+                    </p>
+                  )}
+                </div>
+                {error && <p className="text-sm text-red-500">{error}</p>}
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading
+                    ? currentConfig.loadingText
+                    : currentConfig.buttonText}
+                </Button>
+
+                {currentConfig.forgotPassword && (
+                  <div className="text-center text-sm">
+                    <Link href="/auth/forgot-password" className="inline-block">
+                      Forgot your password?
+                    </Link>
+                  </div>
+                )}
+
+                <div
+                  className={cn(
+                    "text-center text-sm",
+                    currentConfig.forgotPassword ? "mt-0" : "mt-4"
+                  )}
+                >
+                  {currentConfig.footerText}{" "}
+                  <Link
+                    href={currentConfig.footerLinkHref}
+                    className="font-semibold"
+                  >
+                    {currentConfig.footerLinkText}
+                  </Link>
+                </div>
+              </div>
+            </form>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
-};
+}
 
 export default AuthForm;

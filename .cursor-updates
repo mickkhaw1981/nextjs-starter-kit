@@ -115,3 +115,9 @@ Fixed Sonner toast functionality:
 - Added Toaster component to the root layout file (src/app/layout.tsx)
 - Verified imports in colors/page.tsx were correctly implemented
 - Built project successfully to confirm changes
+
+- Created a unified `AuthForm` component that handles both login and signup functionality using schema validation.
+
+- Moved auth form configuration to a dedicated constants file in src/constants/auth-form.ts for better separation of concerns.
+
+- Changed form type from "SIGN_IN" to "LOG_IN" in the constants file and login page for better naming consistency.
