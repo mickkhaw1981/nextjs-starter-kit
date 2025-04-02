@@ -121,3 +121,5 @@ Fixed Sonner toast functionality:
 - Moved auth form configuration to a dedicated constants file in src/constants/auth-form.ts for better separation of concerns.
 
 - Changed form type from "SIGN_IN" to "LOG_IN" in the constants file and login page for better naming consistency.
+
+- Added drop-shadow-lg to the sign-up card container for improved visual depth.
