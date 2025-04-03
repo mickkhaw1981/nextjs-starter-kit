@@ -18,18 +18,15 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import SocialAuthForm from "@/components/form/social-auth-form";
 import { AUTH_FORM_CONFIG, FormType } from "@/constants/auth-form";
+import { AuthCredentials } from "@/types/action";
+import { ActionResponse } from "@/types/global";
 
 // Define the auth form fields
-interface AuthFormValues {
-  email: string;
-  password: string;
-}
-
 interface AuthFormProps {
   formType: FormType;
-  schema: z.ZodType<AuthFormValues>;
-  defaultValues: AuthFormValues;
-  onSubmit: (values: AuthFormValues) => Promise<void>;
+  schema: z.ZodType<AuthCredentials>;
+  defaultValues: AuthCredentials;
+  onSubmit: (values: AuthCredentials) => Promise<ActionResponse<void>>;
   className?: string;
 }
 
@@ -48,16 +45,19 @@ export function AuthForm({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthFormValues>({
+  } = useForm<AuthCredentials>({
     resolver: zodResolver(schema),
     defaultValues,
   });
 
-  const processSubmit = async (data: AuthFormValues) => {
+  const processSubmit = async (data: AuthCredentials) => {
     setIsLoading(true);
     setError(null);
     try {
-      await onSubmit(data);
+      const response = await onSubmit(data);
+      if (!response.success && response.error) {
+        setError(response.error.message);
+      }
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {

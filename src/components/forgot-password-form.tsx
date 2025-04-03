@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
+import handleError from "@/lib/handlers/error";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useState } from "react";
+import { ActionResponse } from "@/types/global";
 
 export function ForgotPasswordForm({
   className,
@@ -24,24 +26,42 @@ export function ForgotPasswordForm({
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const supabase = createClient();
-    setIsLoading(true);
-    setError(null);
-
+  const resetPasswordForEmail = async (
+    email: string
+  ): Promise<ActionResponse<void>> => {
     try {
+      const supabase = createClient();
       // The url which will be included in the email. This URL needs to be configured in your redirect URLs in the Supabase dashboard at https://supabase.com/dashboard/project/_/auth/url-configuration
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/auth/update-password`,
       });
-      if (error) throw error;
-      setSuccess(true);
-    } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
-    } finally {
-      setIsLoading(false);
+
+      if (error) {
+        throw error;
+      }
+
+      return {
+        success: true,
+      };
+    } catch (error) {
+      return handleError(error) as ActionResponse<void>;
     }
+  };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    const response = await resetPasswordForEmail(email);
+
+    if (response.success) {
+      setSuccess(true);
+    } else if (response.error) {
+      setError(response.error.message);
+    }
+
+    setIsLoading(false);
   };
 
   return (
